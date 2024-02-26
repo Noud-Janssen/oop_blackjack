@@ -1,0 +1,78 @@
+@startuml class_diagram
+
+package base {
+    class Main {
+        -m_player_money : int
+        +init() : bool
+        +loop() : bool
+    }
+}
+
+package Cli {
+    enum Input_state_e {
+        INPUT_TURN
+        INPUT_INLAY
+        INPUT_MENU
+    }
+
+    enum Inputs_e {
+        INPUT_HIT
+        INPUT_CALL
+        INPUT_SPLIT
+        INPUT_HELP
+    }
+
+    class Input {
+        +read() : void
+        +set_state(Input_state_e) : void
+        +get_state() : Input_state_e
+        +get_input() : int
+    }
+
+
+    class Output {
+        +Output(\nCard_container *,\nCard_container *,\nCard_container *,\nCard_container *\n)
+
+        +draw()
+    }
+}
+
+Input *--> Input_state_e : -m_state
+
+package Game {
+    enum Card_types_e {
+        CARD_HEART
+        CARD_CLUBS
+        CARD_DIAMONDS
+        CARD_SPADES
+    }
+
+    class Card_container {
+        -m_card_amount : int
+        +get_card() : Card
+        +get_value() : int
+        +discard(&Card_container) : bool
+        +draw(&Card_container) : bool
+    }
+
+    class Card {
+        -m_value : int
+        +get_value() : int
+        +get_type() : Card_types_e
+    }
+
+    Card *--> Card_types_e : -m_type
+    Card_container *---> Card : m_cards[52]
+
+}
+
+
+
+Main *--> Card_container : -m_player_hand\n-m_discard_pile\n-m_casino_hand\n-m_draw_pile
+Main *--> Input : m_input
+Main *--> Output : m_output
+
+Output *--> Card_container : -* mr_player_hand *\n-* mr_discard_pile *\n-* mr_casino_hand\n-* mr_draw_pile
+
+
+@enduml

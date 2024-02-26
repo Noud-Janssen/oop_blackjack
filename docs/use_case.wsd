@@ -1,0 +1,30 @@
+@startuml use_case
+
+left to right direction
+
+actor "Player" as player
+package Game {
+    usecase hit
+    usecase stand
+    usecase split
+    usecase double
+    usecase view_cards
+}
+actor "Casino" as casino
+
+player --> hit
+player --> stand
+player --> split
+player --> double
+player --> view_cards
+
+hit --> casino
+stand --> casino
+split --> casino
+double --> casino
+view_cards --> casino
+
+
+
+
+@enduml
