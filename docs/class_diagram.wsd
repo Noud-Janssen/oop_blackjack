@@ -31,9 +31,14 @@ package Cli {
 
 
     class Output {
+		-m_screen : string
         +Output(\nCard_container *,\nCard_container *,\nCard_container *,\nCard_container *\n)
-
-        +draw()
+		+draw_text(String *string, int x, int y) : void
+		+animate_draw_player() : void
+		+animate_draw_casino() : void
+		+animate_discard() : void
+		+animation_done() : void
+        +print() : void
     }
 }
 
@@ -53,13 +58,16 @@ package Game {
         +get_value() : int
         +discard(&Card_container) : bool
         +draw(&Card_container) : bool
+		+print(String *string, int x, int y) : void
     }
 
     class Card {
         -m_value : int
         +get_value() : int
         +get_type() : Card_types_e
-    }
+
+		+print(String *screen, int x, int y, bool flipped) : void
+	}
 
     Card *--> Card_types_e : -m_type
     Card_container *---> Card : m_cards[52]
