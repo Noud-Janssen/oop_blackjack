@@ -11,14 +11,6 @@ package base {
 		-player_turn() : void
 		-dealer_turn() : void
     }
-
-	class State_machine {
-		-m_current_state : int
-		-m_state_functions: func
-		+define_state(func, int id) : void
-		+set_state(int id) : void
-		+run() : void
-	}
 }
 
 Main *--> State_machine : m_state_machine
