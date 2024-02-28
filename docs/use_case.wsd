@@ -3,14 +3,14 @@
 left to right direction
 
 actor "Player" as player
-package Game {
-    usecase hit
-    usecase stand
-    usecase split
-    usecase double
-    usecase view_cards
+package BlackJack {
+    usecase "hit/draw cards" as hit
+    usecase "stand" as stand
+    usecase "Split hand" as split
+    usecase "Double the inlay" as double
+    usecase "View your hand" as view_cards
 }
-actor "Casino" as casino
+actor "Dealer" as Dealer
 
 player --> hit
 player --> stand
@@ -18,11 +18,11 @@ player --> split
 player --> double
 player --> view_cards
 
-hit --> casino
-stand --> casino
-split --> casino
-double --> casino
-view_cards --> casino
+hit <-- Dealer
+stand <-- Dealer
+split <-- Dealer
+double <-- Dealer
+view_cards <-- Dealer
 
 
 
