@@ -9,6 +9,8 @@ class MainWindow {
     +button_pass() : void
     +button_split() : void
     +button_settings() : void
+    +button_add_player() : void
+
 
     +update() : void
 }
@@ -33,7 +35,7 @@ class Player {
     -m_inlay : int
     -m_name : string
 
-    +set_name(string name) : void
+    +Player(string name)
     +get_name() : string
 
     +input() : void
@@ -56,8 +58,8 @@ Dealer --|> Person
 class Card_container {
     +get_at(int i) : Card
     +get_total_value() : int
-    +discard(&Card_container) : void
-    +draw(&Card_container) : void
+    +discard(Card_container) : void
+    +draw(Card_container) : void
 }
 
 class Card {
