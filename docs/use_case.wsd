@@ -9,6 +9,7 @@ package BlackJack {
     usecase "Split hand" as split
     usecase "Double the inlay" as double
     usecase "View your hand" as view_cards
+    usecase "Set name" as name
 }
 actor "Dealer" as Dealer
 
@@ -17,6 +18,7 @@ player --> stand
 player --> split
 player --> double
 player --> view_cards
+player --> name
 
 hit <-- Dealer
 stand <-- Dealer

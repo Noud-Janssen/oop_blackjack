@@ -1,0 +1,79 @@
+@startuml class_diagram2
+
+class MainWindow {
+    -m_current_turn : void
+    -m_total_players : int
+
+    +MainWindow() : void
+    +button_hit() : void
+    +button_pass() : void
+    +button_split() : void
+    +button_settings() : void
+
+    +update() : void
+}
+
+enum Turn_e {
+    PLAYER_1
+    PLAYER_2
+    PLAYER_3
+    PLAYER_4
+    PLAYER_DEALER
+}
+
+abstract Person {
+    -m_has_folded : bool
+
+    +has_folded() : bool
+    +get_value() : bool
+}  
+
+class Player {
+    -m_coins : int
+    -m_inlay : int
+    -m_name : string
+
+    +set_name(string name) : void
+    +get_name() : string
+
+    +input() : void
+    +win() : void
+    +lose() : void
+}
+
+class Dealer {
+    +Dealer(int hit_below)
+
+    -m_hit_below : int
+
+    +update() : void
+}
+
+Player --|> Person
+Dealer --|> Person
+
+
+class Card_container {
+    +get_at(int i) : Card
+    +get_total_value() : int
+    +discard(&Card_container) : void
+    +draw(&Card_container) : void
+}
+
+class Card {
+    -m_type : int
+    -m_value : int
+    +get_value() : int
+    +get_type() : Card_types_e
+}
+
+MainWindow *--> Player : -m_players
+MainWindow *--> Dealer : -m_dealer
+MainWindow *--> Card_container : -m_draw_pile\nm_discard_pile
+MainWindow *--> Turn_e : -m_current_turn
+
+Person *--> Card_container : -m_hand
+
+Card_container *--> Card : -m_cards
+
+@enduml
