@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace Blackjack {
     class Card_container {
 
-        private List<Card> m_cards;
+        private List<Card> m_cards = new List<Card>();
 
         public void add(Card card) {
             m_cards.Add(card);
@@ -39,7 +39,36 @@ namespace Blackjack {
             Random rnd = new Random();
             int i = rnd.Next(container.get_size());
             m_cards.Add(container.get(i));
+            container.remove(i);
             return true;
+        }
+
+        public void remove(int i) {
+            m_cards.RemoveAt(i);
+        }
+
+        public void fill() {
+            clear();
+            for (int i = 0; i < 13; i++) {
+                Card card_h = new Card(i + 1, Card_types_e.CARD_HEART);
+                Card card_c = new Card(i + 1, Card_types_e.CARD_CLUBS);
+                Card card_s = new Card(i + 1, Card_types_e.CARD_SPADES);
+                Card card_d = new Card(i + 1, Card_types_e.CARD_DIAMONDS);
+                add(card_h);
+                add(card_c);
+                add(card_s);
+                add(card_d);
+            }
+        }
+
+        public void clear() {
+            m_cards.Clear();
+        }
+
+        public void debug() {
+            foreach (Card card in m_cards) {
+                Console.WriteLine(card.get_type().ToString() + " - " + card.get_value().ToString());
+            }
         }
     }
 }

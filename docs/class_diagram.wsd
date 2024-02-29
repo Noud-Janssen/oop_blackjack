@@ -4,12 +4,8 @@ package base {
     class Main {
         -m_player_money : int
 		+init() : void
-		+loop() : void
 
 		-menu() : void
-		-inlay() : void
-		-player_turn() : void
-		-dealer_turn() : void
     }
 }
 
@@ -69,6 +65,15 @@ Output *--> Screen : -m_screen
 Input *--> Input_state_e : -m_state
 
 package BlakJack {
+
+    class Match {
+
+        +run()
+        +run_turn_player()
+        +run_turn_dealer()
+        +check_winner()
+    }
+
     enum Card_types_e {
         CARD_HEART
         CARD_CLUBS
@@ -98,7 +103,7 @@ package BlakJack {
 
 
 
-Main *--> Card_container : -m_player_hand\n-m_discard_pile\n-m_casino_hand\n-m_draw_pile
+Match *--> Card_container : -m_player_hand\n-m_discard_pile\n-m_casino_hand\n-m_draw_pile
 Main *--> Input : m_input
 Main *--> Output : m_output
 
